@@ -21,6 +21,10 @@ class Model {
         this.grid[this.snake[0].x][this.snake[0].y] = 2; //2= snake's head
         //init first fruit
         this.placeFruit();
+        //init direction
+        this.direction = null;
+        //init score
+        this.score=0;
     }
 
     //reset grid
@@ -42,7 +46,64 @@ class Model {
 
     //move snake
     moveSnake() {
+        //get head
+        var head=this.snake[0];
+        var headx=head[0];
+        var heady=head[1];
+        //set current head as body
+        this.grid[headx][heady]=3;
 
+        //get tail
+        var tail=this.snake[this.snake.length-1];
+        var tailx=tail[0];
+        var taily=tail[1];
+
+        //move head
+        switch(this.direction){
+            case 'r':
+                headx++;
+                break;
+            case 'l':
+                headx--;
+                break;
+            case 'u':
+                heady--;
+                break;
+            case 'd':
+                heady++;
+                break;
+        }
+
+        //add new head
+        this.snake.unshift([headx,heady]);
+
+        //error means that snake hit a wall
+        try{
+            if(this.grid[headx][heady]!=3){
+
+                if(this.grid[headx][heady]==1){//if cell is a fruit
+                    placeFruit();
+                    this.score++;
+                }else{//if cell is empty
+                    this.grid[tailx][taily]=0;
+                    this.snake.pop();
+                }
+                //move the head on the grid
+                this.grid[headx][heady]=2;
+
+            }else{ //if the cell is snake's body
+                return this.killSnake();
+            }
+        }catch(e){
+            return this.killSnake();
+        }
+        return false;//means that the snake is still alive
+    }
+
+    //kill the snake
+    killSnake(){
+        this.direction=null; //stop snake movement
+        return true; //means that the snake is dead
     }
 
 }
