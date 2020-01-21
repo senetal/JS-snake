@@ -2,13 +2,11 @@ class Controller {
     constructor(view, model) {
         this.view = view;
         this.model = model;
-
+        this.dif = 2;
         this.highscore = 0;
-
-        this.view.updateView(this.model.grid,'0');
+        this.view.updateView(this.model.grid,'0','d');
 
         document.addEventListener('keydown', function(event) {
-            console.log(event.key);
             switch (event.key) {
                 case 'z':
                 case 'ArrowUp':
@@ -42,7 +40,7 @@ class Controller {
                 }
             }else{
                 app.model.moveSnake();
-                app.view.updateView(app.model.grid,app.model.score);
+                app.view.updateView(app.model.grid,app.model.score,app.model.direction);
             }
         }
 
@@ -51,10 +49,18 @@ class Controller {
     reset(){
         app.model = new Model();
         app.view = new View(app.highscore);
-        app.view.updateView(app.model.grid,'0');
+        app.view.updateView(app.model.grid,'0','d');
+        clearInterval(interval);
+        interval = setInterval(app.play, 50*app.dif);
+    }
+
+    diff(d){
+        console.log(d)
+        app.dif = d;
+        app.reset();
     }
 }
 
 const app = new Controller(new View('0'), new Model());
 
-setInterval(app.play, 50);
+var interval = setInterval(app.play, 50*app.dif);

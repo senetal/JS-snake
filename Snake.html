@@ -11,6 +11,11 @@
         <p id="score"></p>
         <p id="highscore"></p>
 
+        <button type="radio" name="easy" onclick="app.diff(3)">Facile</button>
+        <button type="radio" name="medium" onclick="app.diff(2)">Moyen</button>
+        <button type="radio" name="difficult"onclick="app.diff(1)">Difficile</button>
+
+        <br>
         <button id="reset" type="button" name="reset" onclick="app.reset()">Reset</button>
 
         <script src="view.js" charset="utf-8"></script>
