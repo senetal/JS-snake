@@ -1,5 +1,5 @@
 class View {
-    constructor() {
+    constructor(hs) {
         this.canvas = document.getElementById('grid');
         this.context = this.canvas.getContext('2d');
         this.context.lineWidth=3;
@@ -8,13 +8,12 @@ class View {
         this.context.fillStyle="#ffffff";
         this.context.fillRect(3,3,500,500);
         this.context.stroke();
+
+        var p = document.getElementById('highscore');
+        p.innerHTML = "High score : "+hs;
     }
 
-    reset(){
-        constructor();
-    }
-
-    updateGrid(grid){
+    updateView(grid,score){
         for(var i=0;i<grid.length;i++){
             for(var j=0;j<grid.length;j++){
                 switch(grid[i][j]){
@@ -27,13 +26,16 @@ class View {
                     case 3:
                     this.context.fillStyle="#00ff00";
                     break;
+                    default:
+                    this.context.fillStyle="#ffffff";
                 }
-                if(grid[i][j]){
                     this.context.moveTo(i*25+3,j*25+3);
                     this.context.fillRect(i*25+3,j*25+3,25,25);
-                }
             }
         }
+
+        var p = document.getElementById('score');
+        p.innerHTML = "Score : "+score;
     }
 
 }

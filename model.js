@@ -25,11 +25,7 @@ class Model {
         this.direction = null;
         //init score
         this.score=0;
-    }
-
-    //reset grid
-    reset() {
-        constructor();
+        this.isdead=false;
     }
 
     //place a fruit at random location
@@ -74,16 +70,17 @@ class Model {
                 heady++;
                 break;
         }
-
         //add new head
         this.snake.unshift([headx,heady]);
 
         //error means that snake hit a wall
-        try{
+        if(headx>this.size-1 || headx <0 || heady>this.size-1 || heady <0){
+            return this.killSnake();
+        }else{
             if(this.grid[headx][heady]!=3){
 
                 if(this.grid[headx][heady]==1){//if cell is a fruit
-                    placeFruit();
+                    this.placeFruit();
                     this.score++;
                 }else{//if cell is empty
                     this.grid[tailx][taily]=0;
@@ -95,15 +92,14 @@ class Model {
             }else{ //if the cell is snake's body
                 return this.killSnake();
             }
-        }catch(e){
-            return this.killSnake();
         }
+
         return false;//means that the snake is still alive
     }
 
     //kill the snake
     killSnake(){
-        this.direction=null; //stop snake movement
+        this.isdead=true;
         return true; //means that the snake is dead
     }
 
