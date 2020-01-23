@@ -1,5 +1,5 @@
 class View {
-    constructor(hs) {
+    constructor(hs,skin) {
         this.canvas = document.getElementById('grid');
         this.context = this.canvas.getContext('2d');
         this.context.lineWidth=3;
@@ -9,31 +9,32 @@ class View {
         this.context.fillRect(3,3,500,500);
         this.context.stroke();
 
-        this.images=this.initImages();
+        this.skin=skin
+        this.images=this.initImages(this.skin);
 
 
         var p = document.getElementById('highscore');
         p.innerHTML = "HighScore : "+hs;
     }
 
-    initImages(){
+    initImages(skin){
         var images=[];
         for(var i=0;i<5;i++){
             images.push(new Image());
         }
-        images[0].src="images/boardgame.png";
-        images[1].src="images/food.png";
+        images[0].src="images/skin"+skin+"/boardgame.png";
+        images[1].src="images/skin"+skin+"/food.png";
         images[2]=new Map();
             images[2].set('u',new Image());
             images[2].set('d',new Image());
             images[2].set('r',new Image());
             images[2].set('l',new Image());
-            images[2].get('u').src = "images/headsnake_u.png";
-            images[2].get('d').src = "images/headsnake_d.png";
-            images[2].get('r').src = "images/headsnake_r.png";
-            images[2].get('l').src = "images/headsnake_l.png";
-        images[3].src="images/bodysnake.png";
-        images[4].src="images/wall.png";
+            images[2].get('u').src = "images/skin"+skin+"/headsnake_u.png";
+            images[2].get('d').src = "images/skin"+skin+"/headsnake_d.png";
+            images[2].get('r').src = "images/skin"+skin+"/headsnake_r.png";
+            images[2].get('l').src = "images/skin"+skin+"/headsnake_l.png";
+        images[3].src="images/skin"+skin+"/bodysnake.png";
+        images[4].src="images/skin"+skin+"/wall.png";
         return images;
     }
 

@@ -35,6 +35,7 @@ class Controller {
         if(app.model.direction){
             if(app.model.isdead){
                 console.log("Vous avez perdu. Votre score : "+app.model.score);
+                clearInterval(interval);
                 if(app.model.score>app.highscore){
                     app.highscore=app.model.score;
                 }
@@ -48,7 +49,7 @@ class Controller {
 
     reset(){
         app.model = new Model();
-        app.view = new View(app.highscore);
+        app.view = new View(app.highscore,1);
         app.view.updateView(app.model.grid,'0','d');
         clearInterval(interval);
         interval = setInterval(app.play, 50*app.dif);
@@ -61,6 +62,6 @@ class Controller {
     }
 }
 
-const app = new Controller(new View('0'), new Model());
+const app = new Controller(new View('0',1), new Model());
 
 var interval = setInterval(app.play, 50*app.dif);
