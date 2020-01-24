@@ -1,10 +1,19 @@
 class Controller {
     constructor(view, model) {
+
         this.view = view;
         this.model = model;
-        this.dif = 2;
-        this.highscore = 0;
-        this.view.updateView(this.model.grid,'0','d');
+
+
+        this.model.bindInitGrid(this.initGrid);
+        this.model.bindPlaceFruit(this.placeFruit);
+        this.model.bindPlay(this.play);
+        this.model.bindReset(this.reset);
+        this.model.bindMoveSnake(this.moveSnake);
+        this.model.bindKillSnake(this.killSnake);
+        this.model.bindSetDiff(this.setDiff);
+
+        this.model.execInitGrid();
 
         document.addEventListener('keydown', function(event) {
             switch (event.key) {
@@ -25,43 +34,138 @@ class Controller {
                 app.model.direction = 'r';
                 break;
                 case ' ':
-                app.reset();
+                app.model.execReset();
                 break;
             }
         });
+        window.onload=()=>{
+            this.model.execReset();
+        };
     }
 
-    play() {
-        if(app.model.direction){
-            if(app.model.isdead){
-                console.log("Vous avez perdu. Votre score : "+app.model.score);
-                clearInterval(interval);
-                if(app.model.score>app.highscore){
-                    app.highscore=app.model.score;
+    //init grid
+    initGrid(){
+        this.grid = [];
+        for (var i = 0; i < this.size; i++) {
+            this.grid.push([]);
+            for (var j = 0; j < this.size; j++) {
+                this.grid[i].push(0); //0 = empty cell
+            }
+        }
+        //snake placement
+        this.snake = [
+            [
+                Math.floor(Math.random() * this.size),
+                Math.floor(Math.random() * this.size)
+            ]
+        ];
+        this.grid[this.snake[0][0]][this.snake[0][1]] = 2; //2= snake's head
+        //init first fruit
+        this.placeFruit();
+    }
+
+    //place a fruit at random location
+    placeFruit(){
+        var x;
+        var y;
+        do {
+            x = Math.floor(Math.random() * this.size);
+            y = Math.floor(Math.random() * this.size);
+        } while (this.grid[x][y] != 0);
+        //1= fruit
+        this.grid[x][y] = 1;
+    }
+
+    //move snake
+    moveSnake(){
+        //get head
+        var head=this.snake[0];
+        var headx=head[0];
+        var heady=head[1];
+        //set current head as body
+        this.grid[headx][heady]=3;
+
+        //get tail
+        var tail=this.snake[this.snake.length-1];
+        var tailx=tail[0];
+        var taily=tail[1];
+
+        //move head
+        switch(this.direction){
+            case 'r':
+                headx++;
+                break;
+            case 'l':
+                headx--;
+                break;
+            case 'u':
+                heady--;
+                break;
+            case 'd':
+                heady++;
+                break;
+        }
+        this.snake.pop();
+        this.grid[tailx][taily]=0;
+        //add new head
+        this.snake.unshift([headx,heady]);
+
+        //error means that snake hit a wall
+        if(headx>this.size-1 || headx <0 || heady>this.size-1 || heady <0){
+            return this.execKillSnake();
+        }else{
+            if(this.grid[headx][heady]!=3){
+
+                if(this.grid[headx][heady]==1){//if cell is a fruit
+                    this.execPlaceFruit();
+                    this.score+=4-this.dif;
                 }
-            }else{
-                app.model.moveSnake();
-                app.view.updateView(app.model.grid,app.model.score,app.model.direction);
+                //move the head on the grid
+                this.grid[headx][heady]=2;
+
+            }else{ //if the cell is snake's body
+                return this.execKillSnake();
             }
         }
 
+        return false;//means that the snake is still alive
     }
 
-    reset(){
-        app.model = new Model();
-        app.view = new View(app.highscore,1);
-        app.view.updateView(app.model.grid,'0','d');
+    //kill the snake
+    killSnake(){
+        this.direction=null;
+        this.isdead=true;
+        console.log("Vous avez perdu. Votre score : "+this.score);
+        this.score=0;
         clearInterval(interval);
-        interval = setInterval(app.play, 50*app.dif);
+        return true; //means that the snake is dead
     }
 
-    diff(d){
-        console.log(d)
-        app.dif = d;
-        app.reset();
+    play = () =>{
+
+        if(this.model.direction){
+                this.model.execMoveSnake();
+                this.view.updateView(this.model.grid,this.model.score,this.model.direction);
+            if(this.model.score>this.model.highscore){
+                this.model.highscore=this.model.score;
+            }
+        }
+    };
+
+    reset = () =>{
+        this.model.execKillSnake();
+        this.model.execInitGrid();
+        this.model.isdead=false;
+        this.view = new View(this.model.highscore,1);
+        this.view.updateView(this.model.grid,this.model.score,'d');
+        clearInterval(interval);
+        interval = setInterval(this.model.execPlay, 50*this.model.dif);
+    };
+
+    setDiff(d){
+        this.model.dif = d;
+        this.model.execReset();
     }
 }
-
+var interval;
 const app = new Controller(new View('0',1), new Model());
-
-var interval = setInterval(app.play, 50*app.dif);

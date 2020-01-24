@@ -6,17 +6,24 @@
     </head>
     <body>
 
-        <canvas id="grid" width="506" height="506"></canvas>
+        <div class="">
+            <canvas id="grid" width="506" height="506"></canvas>
+        </div>
+        <div class="">
+            <p id="score"></p>
+            <p id="highscore"></p>
+            <button type="radio" name="easy" onclick="app.setDiff(3)">Facile</button>
+            <button type="radio" name="medium" onclick="app.setDiff(2)">Moyen</button>
+            <button type="radio" name="difficult"onclick="app.setDiff(1)">Difficile</button>
+            <br>
+            <canvas id="skin0" width="56" height="56"></canvas>
+            <canvas id="skin1" width="56" height="56"></canvas>
+            <br>
+            <button id="reset" type="button" name="reset" onclick="app.reset()">Reset</button>
+        </div>
 
-        <p id="score"></p>
-        <p id="highscore"></p>
 
-        <button type="radio" name="easy" onclick="app.diff(3)">Facile</button>
-        <button type="radio" name="medium" onclick="app.diff(2)">Moyen</button>
-        <button type="radio" name="difficult"onclick="app.diff(1)">Difficile</button>
 
-        <br>
-        <button id="reset" type="button" name="reset" onclick="app.reset()">Reset</button>
 
         <script src="view.js" charset="utf-8"></script>
         <script src="model.js" charset="utf-8"></script>
