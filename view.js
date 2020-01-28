@@ -24,7 +24,7 @@ class View {
     }
 
     initSkin(skin){
-        var canvas=document.getElementById("skin"+skin);
+        var canvas=document.getElementsByClassName("skin")[skin];
         var context=canvas.getContext('2d');
         context.rect(0,0,56,56);
         context.stroke();
@@ -45,6 +45,11 @@ class View {
         context.drawImage(images[2],3,28,25,25);
         context.drawImage(images[1],28,3,25,25);
         context.stroke();
+    }
+
+    setSkin(skin){
+        this.skin=skin;
+        this.images=this.initImages(this.skin);
     }
 
     initImages(skin){
@@ -78,7 +83,6 @@ class View {
     }
 
     updateView(grid,score,angle){
-        this.initSkins();
         for(var i=0;i<grid.length;i++){
             for(var j=0;j<grid.length;j++){
                 this.context.drawImage(this.images[0],i*25+3,j*25+3,25,25);
@@ -96,6 +100,15 @@ class View {
 
         var p = document.getElementById('score');
         p.innerHTML = "Score : "+score;
+    }
+
+    showDefeat(score){
+        var defeat = document.getElementById('defeat');
+        if(score==-1){
+            defeat.innerHTML="";
+        }else{
+            defeat.innerHTML="Vous avez perdu... Score : "+score;
+        }
     }
 
 }

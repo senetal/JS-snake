@@ -12,7 +12,6 @@ class Model {
 
         //init score
         this.score=0;
-        this.isdead=false;
     }
 
     bindInitGrid(callback){ this.initGrid = callback; }
@@ -25,8 +24,8 @@ class Model {
 
     execInitGrid(){ this.initGrid(); }
     execPlaceFruit(){ this.placeFruit(); }
-    execPlay = () => { this.play(); }
-    execReset = () => { this.reset(); }
+    execPlay = ()=>{ this.play(); }
+    execReset(){ this.reset(); }
     execMoveSnake(){ this.moveSnake(); }
     execKillSnake(){ this.killSnake(); }
     execSetDiff(dif){ this.setDiff(dif); }
