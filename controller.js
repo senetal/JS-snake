@@ -223,5 +223,8 @@ class Controller {
         this.execReset();
     }
 }
+
+if(!window.localStorage.getItem("snakeHs"))window.localStorage.setItem("snakeHs",[0,0,0,0,0]);
+
 var interval;
 const app = new Controller(new View(window.localStorage.getItem("snakeHs").split(','), 0), new Model());
