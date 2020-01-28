@@ -25,6 +25,8 @@ class Controller {
 
     initListeners() {
         document.addEventListener('keydown', function(event) {
+            if (!app.res){
+                app.res++;
             switch (event.key) {
                 case 'z':
                 case 'ArrowUp':
@@ -47,15 +49,17 @@ class Controller {
                         app.model.direction = 'r';
                     break;
                 case ' ':
-                    if (!app.res) {
-                        app.res++;
                         app.model.execReset();
                         setTimeout(() => {
                             app.res = 0;
-                        }, 500);
-                    }
+                        }, 300);
                     break;
             }
+            if(event.key!=' ')
+            setTimeout(() => {
+                app.res = 0;
+            }, 50);
+        }
         });
 
         var buttons = document.getElementsByClassName('diff');

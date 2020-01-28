@@ -9,9 +9,9 @@ class View {
         this.context = this.canvas.getContext('2d');
 
         var p = document.getElementById('highscore');
-        p.innerHTML = "Top 5 :<br>";
+        p.innerHTML="";
         for (var i = 0; i < 5; i++)
-            p.innerHTML += (i + 1) + ". " + hs[i] + "<br>";
+            p.innerHTML += "<li>"+hs[i] + "</li>";
     }
 
     initSkins() {
@@ -22,8 +22,6 @@ class View {
     initSkin(skin) {
         var canvas = document.getElementsByClassName("skin")[skin];
         var context = canvas.getContext('2d');
-        context.rect(0, 0, 56, 56);
-        context.stroke();
         var images = [];
         for (var i = 0; i < 5; i++) {
             images.push(new Image());
@@ -33,13 +31,14 @@ class View {
         images[2].src = "images/skin" + skin + "/headsnake_d.png";
         images[3].src = "images/skin" + skin + "/bodysnake.png";
         images[4].src = "images/skin" + skin + "/wall.png";
-        context.drawImage(images[0], 3, 3, 25, 25);
-        context.drawImage(images[0], 28, 3, 25, 25);
-        context.drawImage(images[0], 28, 28, 25, 25);
-        context.drawImage(images[0], 3, 28, 25, 25);
-        context.drawImage(images[3], 3, 3, 25, 25);
-        context.drawImage(images[2], 3, 28, 25, 25);
-        context.drawImage(images[1], 28, 3, 25, 25);
+
+        context.drawImage(images[0], 25, 25, 25, 25);
+        context.drawImage(images[0], 25, 50, 25, 25);
+        context.drawImage(images[0], 50, 50, 25, 25);
+        context.drawImage(images[0], 50, 25, 25, 25);
+        context.drawImage(images[3], 5, 5, 25, 25);
+        context.drawImage(images[2], 25, 25, 25, 25);
+        context.drawImage(images[1], 25, 0, 25, 25);
         context.stroke();
     }
 
