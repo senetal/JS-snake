@@ -4,30 +4,58 @@ class Model {
         //difficulty
         this.dif = 2;
         //highscore
-        this.highscore = 0;
+        this.highscore = window.localStorage.getItem('snakeHs').split(',');
         //grid size
         this.size = 20;
         //init direction
         this.direction = null;
 
         //init score
-        this.score=0;
+        this.score = 0;
     }
 
-    bindInitGrid(callback){ this.initGrid = callback; }
-    bindPlaceFruit(callback){ this.placeFruit = callback; }
-    bindPlay(callback){ this.play = callback; }
-    bindReset(callback){ this.reset = callback; }
-    bindMoveSnake(callback){ this.moveSnake = callback; }
-    bindKillSnake(callback){ this.killSnake = callback; }
-    bindSetDiff(callback){ this.setDiff = callback; }
+    bindInitGrid(callback) {
+        this.initGrid = callback;
+    }
+    bindPlaceFruit(callback) {
+        this.placeFruit = callback;
+    }
+    bindPlay(callback) {
+        this.play = callback;
+    }
+    bindReset(callback) {
+        this.reset = callback;
+    }
+    bindMoveSnake(callback) {
+        this.moveSnake = callback;
+    }
+    bindKillSnake(callback) {
+        this.killSnake = callback;
+    }
+    bindSetDiff(callback) {
+        this.setDiff = callback;
+    }
 
-    execInitGrid(){ this.initGrid(); }
-    execPlaceFruit(){ this.placeFruit(); }
-    execPlay = ()=>{ this.play(); }
-    execReset(){ this.reset(); }
-    execMoveSnake(){ this.moveSnake(); }
-    execKillSnake(){ this.killSnake(); }
-    execSetDiff(dif){ this.setDiff(dif); }
+    execInitGrid() {
+        this.initGrid();
+    }
+    execPlaceFruit() {
+        this.placeFruit();
+    }
+    execPlay = () => {
+        this.play();
+    }
+    execReset() {
+        this.reset();
+    }
+    execMoveSnake() {
+        this.moveSnake();
+    }
+    execKillSnake() {
+        this.killSnake();
+    }
+    execSetDiff(dif) {
+        this.setDiff(dif);
+    }
 
 }
