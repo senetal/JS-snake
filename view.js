@@ -12,6 +12,8 @@ class View {
         p.innerHTML="";
         for (var i = 0; i < 5; i++)
             p.innerHTML += "<li>"+hs[i] + "</li>";
+
+        document.getElementById("defeat").innerHTML="";
     }
 
     initSkins() {
@@ -99,6 +101,7 @@ class View {
         this.context.fillStyle='#ffffff80';
         this.context.fillRect(0,0,556,556);
         this.context.stroke();
+        document.getElementById("defeat").innerHTML="Vous avez perdu...";
     }
 
     updateView(grid, score, angle) {
