@@ -96,7 +96,6 @@ class View {
     }
 
     killView = () =>{
-        console.log(this)
         this.context.fillStyle='#ffffff80';
         this.context.fillRect(0,0,556,556);
         this.context.stroke();
