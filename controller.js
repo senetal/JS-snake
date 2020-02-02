@@ -52,7 +52,7 @@ class Controller {
                         app.model.execReset();
                         setTimeout(() => {
                             app.res = 0;
-                        }, 300);
+                        }, 500);
                     break;
             }
             if(event.key!=' ')
