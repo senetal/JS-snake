@@ -2,24 +2,30 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="mycss.css">
         <title>Snek</title>
     </head>
     <body>
-        <div class="">
+        <div class="game">
             <canvas id="grid" width="556" height="556"></canvas>
         </div>
-        <div class="">
-            <p id="score"></p>
-            <ol id="highscore"></ol>
-            <button class="diff" type="radio" name="easy" value="3">Facile</button>
-            <button class="diff" type="radio" name="medium" value="2">Moyen</button>
-            <button class="diff" type="radio" name="difficult" value="1">Difficile</button>
-            <br>
-            <canvas id="skin0" class="skin" width="56" height="56" ></canvas>
-            <canvas id="skin1" class="skin" width="56" height="56" ></canvas>
-            <br>
+        <div class="info">
+            <div class="score">
+              <h2> Top 5 ! </h2>
+              <ol id="highscore"></ol>
+            </div>
+            <div class="niveau">
+              <button class="diff" type="radio" name="easy" value="3">Facile</button>
+              <button class="diff" type="radio" name="medium" value="2">Moyen</button>
+              <button class="diff" type="radio" name="difficult" value="1">Difficile</button>
+            </div>
+            <div class="canvas">
+              <canvas id="skin0" class="skin" width="56" height="56" ></canvas>
+              <canvas id="skin1" class="skin" width="56" height="56" ></canvas>
+            </div>
             <p id="defeat"></p>
-            <button id="reset" type="button" name="reset">Reset</button>
+            <p id="score"></p>
+            <button id="reset" type="button" name="Retry">Reset</button>
         </div>
 
         <script src="view.js" charset="utf-8"></script>

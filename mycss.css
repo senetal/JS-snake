@@ -1,0 +1,84 @@
+body{
+  display: flex;
+}
+
+.game{
+  margin: auto;
+}
+.info{
+  margin: auto;
+}
+
+.score{
+  margin: auto;
+  -moz-box-shadow: 2px 2px 6px #888;
+  -webkit-box-shadow: 2px 2px 6px #888;
+  box-shadow:2px 2px 6px #888;
+  padding-bottom: 1%;
+}
+
+
+h2{
+  font-size: 32px;
+  font-family: Helvetica, sans-serif;
+  color: green;
+  padding:16px;
+  font-weight:lighter;
+  text-align:center;
+}
+
+.niveau{
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.diff{
+  padding:6px 0 6px 0;
+	font:bold 13px Arial;
+	background:#f5f5f5;
+	color:#555;
+	border-radius:2px;
+	width:100px;
+	border:1px solid #ccc;
+}
+
+.canvas{
+  display: flex;
+  justify-content: center;
+}
+
+.skin{
+  margin-right:2%;
+  margin-left: 2%;
+}
+
+#reset{
+  padding:6px 0 6px 0;
+	font:bold 13px Arial;
+	background:#f5f5f5;
+	color:#555;
+	border-radius:2px;
+	width:100px;
+	border:1px solid #ccc;
+  margin-left: 33%;
+}
+
+/* effet sur la liste, copié de https://www.alsacreations.com/article/lire/1210-donnez-du-style-a-vos-listes.html */
+ol {counter-reset: repas;} /* on initialise et nomme un compteur */
+li {
+	list-style-type: none;
+	counter-increment: repas; /* on incrémente le compteur à chaque nouveau li */
+	margin-bottom: 10px;
+}
+li:before {
+	content: counter(repas); /* on affiche le compteur */
+	padding: 0 20px 6px;
+	margin-right: 8px;
+	vertical-align: top;
+	background: green;
+	-moz-border-radius: 60px;
+	border-radius: 60px;
+	font-weight: bold;
+	font-size: 0.8em;
+	color: white;
+}
