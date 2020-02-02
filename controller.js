@@ -203,17 +203,18 @@ class Controller {
     };
 
     reset = () => {
-
+        var score = this.model.score;
+        this.model.score = 0;
         this.model.direction = null;
         for (var i = 0; i < this.model.highscore.length; i++) {
-            if (this.model.score > this.model.highscore[i]) {
-                this.model.highscore.splice(i, 0, this.model.score);
+            if (score > this.model.highscore[i]) {
+                this.model.highscore.splice(i, 0, score);
                 this.model.highscore.pop();
                 window.localStorage.setItem("snakeHs", this.model.highscore);
                 break;
             }
         }
-        this.model.score = 0;
+
         //this.view.showDefeat(-1);
         this.model.execInitGrid();
         this.view = new View(window.localStorage.getItem("snakeHs").split(','), this.view.skin);
