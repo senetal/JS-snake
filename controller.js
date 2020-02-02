@@ -189,14 +189,14 @@ class Controller {
             }
         }
         this.model.direction = null;
-        this.view.showDefeat(this.model.score);
-        this.model.score = 0;
+        //this.view.showDefeat(this.model.score);
+        setTimeout(this.view.killView, 50);
     }
 
     play = () => {
 
         if (this.model.direction) {
-            this.view.showDefeat(-1);
+            //this.view.showDefeat(-1);
             this.model.execMoveSnake();
             this.view.updateView(this.model.grid, this.model.score, this.model.direction);
         }
@@ -214,7 +214,7 @@ class Controller {
             }
         }
         this.model.score = 0;
-        this.view.showDefeat(-1);
+        //this.view.showDefeat(-1);
         this.model.execInitGrid();
         this.view = new View(window.localStorage.getItem("snakeHs").split(','), this.view.skin);
         this.view.updateView(this.model.grid, this.model.score, 'd');

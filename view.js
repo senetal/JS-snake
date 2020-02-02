@@ -22,6 +22,8 @@ class View {
     initSkin(skin) {
         var canvas = document.getElementsByClassName("skin")[skin];
         var context = canvas.getContext('2d');
+        context.rect(2,2,52,52);
+        context.stroke();
         var images = [];
         for (var i = 0; i < 5; i++) {
             images.push(new Image());
@@ -32,13 +34,13 @@ class View {
         images[3].src = "images/skin" + skin + "/bodysnake.png";
         images[4].src = "images/skin" + skin + "/wall.png";
 
-        context.drawImage(images[0], 25, 25, 25, 25);
-        context.drawImage(images[0], 25, 50, 25, 25);
-        context.drawImage(images[0], 50, 50, 25, 25);
-        context.drawImage(images[0], 50, 25, 25, 25);
-        context.drawImage(images[3], 5, 5, 25, 25);
-        context.drawImage(images[2], 25, 25, 25, 25);
-        context.drawImage(images[1], 25, 0, 25, 25);
+        context.drawImage(images[0], 3, 3, 25, 25);
+        context.drawImage(images[0], 3, 28, 25, 25);
+        context.drawImage(images[0], 28, 28, 25, 25);
+        context.drawImage(images[0], 28, 3, 25, 25);
+        context.drawImage(images[3], 3, 3, 25, 25);
+        context.drawImage(images[2], 28, 3, 25, 25);
+        context.drawImage(images[1], 3, 28, 25, 25);
         context.stroke();
     }
 
@@ -93,6 +95,13 @@ class View {
         return images;
     }
 
+    killView = () =>{
+        console.log(this)
+        this.context.fillStyle='#ffffff80';
+        this.context.fillRect(0,0,556,556);
+        this.context.stroke();
+    }
+
     updateView(grid, score, angle) {
         for (var i = 0; i < grid.length; i++) {
             for (var j = 0; j < grid.length; j++) {
@@ -112,15 +121,6 @@ class View {
 
         var p = document.getElementById('score');
         p.innerHTML = "Score : " + score;
-    }
-
-    showDefeat(score) {
-        var defeat = document.getElementById('defeat');
-        if (score == -1) {
-            defeat.innerHTML = "";
-        } else {
-            defeat.innerHTML = "Vous avez perdu... Score : " + score;
-        }
     }
 
 }
