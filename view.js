@@ -53,47 +53,47 @@ class View {
 
     initImages(skin) {
         var images = [];
-        var count = 0;
+        //var count = 0;
         for (var i = 0; i < 5; i++) {
             images.push(new Image());
         }
         images[0].src = "images/skin" + skin + "/boardgame.png";
-        images[0].onload = function() {
-            count++;
-        };
+        // images[0].onload = function() {
+        //     count++;
+        // };
         images[1].src = "images/skin" + skin + "/food.png";
-        images[1].onload = function() {
-            count++;
-        };
+        // images[1].onload = function() {
+        //     count++;
+        // };
         images[2] = new Map();
         images[2].set('u', new Image());
         images[2].set('d', new Image());
         images[2].set('r', new Image());
         images[2].set('l', new Image());
         images[2].get('u').src = "images/skin" + skin + "/headsnake_u.png";
-        images[2].get('u').onload = function() {
-            count++
-        };
+        // images[2].get('u').onload = function() {
+        //     count++
+        // };
         images[2].get('d').src = "images/skin" + skin + "/headsnake_d.png";
-        images[2].get('d').onload = function() {
-            count++
-        };
+        // images[2].get('d').onload = function() {
+        //     count++
+        // };
         images[2].get('r').src = "images/skin" + skin + "/headsnake_r.png";
-        images[2].get('r').onload = function() {
-            count++
-        };
+        // images[2].get('r').onload = function() {
+        //     count++
+        // };
         images[2].get('l').src = "images/skin" + skin + "/headsnake_l.png";
-        images[2].get('l').onload = function() {
-            count++
-        };
+        // images[2].get('l').onload = function() {
+        //     count++
+        // };
         images[3].src = "images/skin" + skin + "/bodysnake.png";
-        images[3].onload = function() {
-            count++
-        };
+        // images[3].onload = function() {
+        //     count++
+        // };
         images[4].src = "images/skin" + skin + "/wall.png";
-        images[4].onload = function() {
-            count++
-        };
+        // images[4].onload = function() {
+        //     count++
+        // };
         return images;
     }
 
